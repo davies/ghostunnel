@@ -21,9 +21,8 @@ import (
 )
 
 func authorized(conn tls.ConnectionState) bool {
-	// First up: check if we have a valid client certificate. We always require
-	// a valid, signed client certificate to be present.
-	if len(conn.VerifiedChains) == 0 {
+	// First up: check if we have a valid client certificate.
+	if !*serverNoClientCert && len(conn.VerifiedChains) == 0 {
 		return false
 	}
 

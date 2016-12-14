@@ -110,7 +110,10 @@ func buildConfig(caBundlePath string) (*tls.Config, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	var clientAuth tls.ClientAuthType
+	if !*serverNoClientCert {
+		clientAuth = tls.RequireAndVerifyClientCert
+	}
 	return &tls.Config{
 		// Certificates
 		RootCAs:   ca,
@@ -118,7 +121,7 @@ func buildConfig(caBundlePath string) (*tls.Config, error) {
 
 		PreferServerCipherSuites: true,
 
-		ClientAuth: tls.RequireAndVerifyClientCert,
+		ClientAuth: clientAuth,
 		MinVersion: tls.VersionTLS12,
 		CipherSuites: []uint16{
 			tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
