@@ -111,9 +111,9 @@ func buildConfig(caBundlePath string) (*tls.Config, error) {
 		return nil, err
 	}
 	var clientAuth tls.ClientAuthType
-	if !*serverNoClientCert {
-		clientAuth = tls.RequireAndVerifyClientCert
-	}
+	// if !*serverNoClientCert {
+	// 	clientAuth = tls.RequireAndVerifyClientCert
+	// }
 	return &tls.Config{
 		// Certificates
 		RootCAs:   ca,

@@ -22,9 +22,9 @@ import (
 
 func authorized(conn tls.ConnectionState) bool {
 	// First up: check if we have a valid client certificate.
-	if !*serverNoClientCert && len(conn.VerifiedChains) == 0 {
-		return false
-	}
+	// if !*serverNoClientCert && len(conn.VerifiedChains) == 0 {
+	// 	return false
+	// }
 
 	// If --allow-all has been set, a valid cert is sufficient to connect.
 	if *serverAllowAll {
